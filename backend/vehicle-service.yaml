@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: vehicle-service
-          image: rakizouari/vehicle-service:latest
+          image: rakizouari/vehicleservice:latest
           ports:
             - containerPort: 8082
           env:
