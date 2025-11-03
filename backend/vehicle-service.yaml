@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-service
+  namespace: car-rental
+spec:
+  selector:
+    matchLabels:
+      app: vehicle-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vehicle-service
+    spec:
+      containers:
+        - name: vehicle-service
+          image: rakizouari/vehicle-service:latest
+          ports:
+            - containerPort: 8082
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: http://eureka-server.car-rental.svc.cluster.local:8761/eureka/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vehicle-service
+  namespace: car-rental
+spec:
+  selector:
+    app: vehicle-service
+  ports:
+    - port: 8082
+      targetPort: 8082
+  type: ClusterIP
