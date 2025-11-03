@@ -19,8 +19,18 @@ spec:
           ports:
             - containerPort: 8082
           env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql.car-rental.svc.cluster.local:3306/carrental
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: mysql-root-password
             - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
               value: http://eureka-server.car-rental.svc.cluster.local:8761/eureka/
+
 ---
 apiVersion: v1
 kind: Service
