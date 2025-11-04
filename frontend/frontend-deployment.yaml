@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: your-dockerhub-username/car-rental-frontend:latest
+          image: rakizouari/car-rental-frontend:latest
           ports:
             - containerPort: 80
           resources:
