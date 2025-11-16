@@ -1,27 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: car-rental-frontend
   namespace: car-rental
+  labels:
+    app: car-rental-frontend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: frontend
+      app: car-rental-frontend
   template:
     metadata:
       labels:
-        app: frontend
+        app: car-rental-frontend
     spec:
       containers:
-        - name: frontend
-          image: rakizouari/car-rental-frontend:latest
+        - name: car-rental-frontend
+          image: rakizouari/car-rental-frontend:2.0.4
           ports:
             - containerPort: 80
-          resources:
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
+          imagePullPolicy: Always
